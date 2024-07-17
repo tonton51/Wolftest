@@ -15,7 +15,7 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
     public TextMeshProUGUI anstext;
     public TextMeshProUGUI writenumtext;
     public GameObject button;
-    public static List<string> textarr=new List<string>();
+    public static Dictionary<int,string> textarr=new Dictionary<int,string>();
     private const byte TextWriteEventCode=1;
     public static int writenum=0;
     public static bool writeflag=false;
@@ -53,7 +53,12 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
 
     // テストでテキストのみ送信
     public void OnClick(){
-        object[] content=new object[]{text.text};
+        //object[] content=new object[]{text.text,PhotonNetwork.LocalPlayer.ActorNumber};
+
+        Dictionary<string,object> content=new Dictionary<string,object>{
+            {"writetext",text.text},
+            {"playernum",PhotonNetwork.LocalPlayer.ActorNumber}
+        };
 
         RaiseEventOptions raiseEventOptions=new RaiseEventOptions{
             Receivers=ReceiverGroup.All
@@ -66,14 +71,14 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
 
     public void OnEvent(EventData photonEvent){
         if(photonEvent.Code==TextWriteEventCode){
-            object[] data=(object[])photonEvent.CustomData;
-            string writetext=(string)data[0];
-            textarr.Add(writetext);
+            //object[] data=(object[])photonEvent.CustomData;
+            Dictionary<string,object> data=(Dictionary<string,object>)photonEvent.CustomData;
+            string writetext=(string)data["writetext"];
+            int playernum=(int)data["playernum"];
+            //textarr.Add(writetext);
             writenum+=1;
-            writenumtext.text=writenum.ToString("F1");
-            // if(writenum==4){
-            //     writeflag=true;
-            // }
+            writenumtext.text=playernum.ToString("F1");
+            textarr.Add(playernum,writetext);
             
         }
     }

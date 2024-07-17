@@ -10,7 +10,7 @@ public class TextReceiver : MonoBehaviour
 {
 
     // public static int writenum=0;
-    List<string> textarr=new List<string>();
+    Dictionary<int,string> textarr=new Dictionary<int,string>();
     public TextMeshProUGUI ans1;
     public TextMeshProUGUI ans2;
     public TextMeshProUGUI ans3;
@@ -45,7 +45,7 @@ public class TextReceiver : MonoBehaviour
         //writenum.text=flag.ToString();
         textarr=TextManager.textarr;
         //if(flag){
-            ans1.text=textarr[0];
+            ans1.text=textarr[4];
             ans2.text=textarr[1];
             ans3.text=textarr[2];
             ans4.text=textarr[3];
