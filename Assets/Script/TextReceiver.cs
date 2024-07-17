@@ -40,15 +40,15 @@ public class TextReceiver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool flag=TextManager.writeflag;
+        //bool flag=TextManager.writeflag;
         // num=TextManager.getWritenum();
-        writenum.text=flag.ToString();
+        //writenum.text=flag.ToString();
         textarr=TextManager.textarr;
-        if(flag){
+        //if(flag){
             ans1.text=textarr[0];
             ans2.text=textarr[1];
             ans3.text=textarr[2];
             ans4.text=textarr[3];
-        }
+        //}
     }
 }

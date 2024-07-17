@@ -224,6 +224,7 @@ MonoBehaviour:
   text: {fileID: 1544421156}
   anstext: {fileID: 745980528}
   writenumtext: {fileID: 1783022062}
+  button: {fileID: 2080232088}
 --- !u!4 &389979864
 Transform:
   m_ObjectHideFlags: 0

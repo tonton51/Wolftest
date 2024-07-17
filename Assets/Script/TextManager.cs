@@ -14,6 +14,7 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
     public TextMeshProUGUI text;
     public TextMeshProUGUI anstext;
     public TextMeshProUGUI writenumtext;
+    public GameObject button;
     public static List<string> textarr=new List<string>();
     private const byte TextWriteEventCode=1;
     public static int writenum=0;
@@ -40,7 +41,9 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
     // Update is called once per frame
     void Update()
     {
-        
+        if(writenum==4){
+                SceneManager.LoadScene("ShowScene");
+        }
     }
 
     // テキスト表示用
@@ -57,7 +60,8 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
         };
 
         PhotonNetwork.RaiseEvent(TextWriteEventCode,content,raiseEventOptions,SendOptions.SendReliable);
-        SceneManager.LoadScene("ShowScene");
+        button.SetActive(false);
+
     }
 
     public void OnEvent(EventData photonEvent){
@@ -67,9 +71,9 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
             textarr.Add(writetext);
             writenum+=1;
             writenumtext.text=writenum.ToString("F1");
-            if(writenum==3){
-                writeflag=true;
-            }
+            // if(writenum==4){
+            //     writeflag=true;
+            // }
             
         }
     }
