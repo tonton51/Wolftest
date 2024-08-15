@@ -69,6 +69,7 @@ public class TextManager : MonoBehaviourPunCallbacks,IOnEventCallback
 
     }
 
+    // テキスト送信のためのイベントコード送受信
     public void OnEvent(EventData photonEvent){
         if(photonEvent.Code==TextWriteEventCode){
             //object[] data=(object[])photonEvent.CustomData;
